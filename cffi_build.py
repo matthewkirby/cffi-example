@@ -18,11 +18,11 @@ def compile_C():
 def cffi_setup():
     ffibuilder = FFI()
 
-
     # Tell cffi which functions to add to the lib
     ffibuilder.cdef("""
         double add(double x, double y);
         double sum_array(double arr[], int length);
+        double do_things(double arr[], int length);
     """)
 
     # Tell cffi, 
@@ -33,7 +33,7 @@ def cffi_setup():
     """
         #include "include/add.h"
     """,
-        libraries=['build/add'])
+        libraries=['{}/build/add'.format(os.getcwd())])
 
     return ffibuilder
 
